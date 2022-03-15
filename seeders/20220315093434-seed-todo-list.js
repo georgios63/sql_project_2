@@ -9,25 +9,13 @@ module.exports = {
      * await queryInterface.bulkInsert('People', [{
      *   name: 'John Doe',
      *   isBetaMember: false
-     * }], {});
+     * }], {})
      */
-
     await queryInterface.bulkInsert(
-      "users",
+      "todoLists",
       [
         {
-          name: "John Doe",
-          email: "wdadwawd@wadad.com",
-          phone: "2423423525",
-          password: "dawdawdaw",
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          name: "Cry me a river",
-          email: "dawd@wadad.com",
-          phone: "2423423525",
-          password: "dawdawdaw",
+          name: "ToDo",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -43,7 +31,5 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await console.log(Sequelize);
-    await queryInterface.bulkDelete("users", null, {});
   },
 };
