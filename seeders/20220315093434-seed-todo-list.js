@@ -15,7 +15,20 @@ module.exports = {
       "todoLists",
       [
         {
-          name: "ToDo",
+          name: "George's Work list",
+          userId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "George's Personal list",
+          userId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          name: "Karla's list",
+          userId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -31,5 +44,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    return await queryInterface.bulkDelete("todoLists", null, {});
   },
 };

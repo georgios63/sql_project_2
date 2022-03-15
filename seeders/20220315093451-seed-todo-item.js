@@ -13,6 +13,15 @@ module.exports = {
       [
         {
           task: "Make the app work",
+          todolistId: 1,
+          deadline: "today",
+          important: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          task: "Make the relations work",
+          todolistId: 2,
           deadline: "today",
           important: true,
           createdAt: new Date(),

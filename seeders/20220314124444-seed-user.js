@@ -23,6 +23,14 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          name: "Karla",
+          email: "dwdw@wadad.com",
+          phone: "2423423525",
+          password: "dawdawdaw",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );

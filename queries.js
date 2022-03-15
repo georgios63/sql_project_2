@@ -12,7 +12,7 @@ const getUsers = async () => {
   }
 };
 
-// getUsers().then((users) => console.log(users));
+getUsers().then((users) => console.log(users));
 
 const getTodoItems = async () => {
   try {
