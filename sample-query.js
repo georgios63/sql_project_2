@@ -1,14 +1,24 @@
-const User = require("./models").user;
+const TodoItem = require("./models").todoItem;
 
-async function getAllUsers() {
+async function createSampleTodoItems() {
   try {
-    // This is how we can use a query method to get all the users from the database
-    // Selects all rows. Resolves with a (possibly empty) array
-    const allUsers = await User.findAll({ raw: true });
-    return allUsers;
+    const todo1 = await TodoItem.create({
+      task: "Clean bedroom",
+      important: false,
+    });
+    const todo2 = await TodoItem.create({
+      task: "Learn to code",
+      important: true,
+    });
+    const todo3 = await TodoItem.create({
+      task: "Have fun",
+      important: true,
+    });
+
+    return [todo1, todo2, todo3].map((item) => item.toJSON());
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 }
 
-getAllUsers().then((users) => console.log(users));
+createSampleTodoItems().then((todos) => console.log(todos));
