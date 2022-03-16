@@ -1,7 +1,29 @@
 {
   "dependencies": {
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15",
     "pg": "^8.7.3",
     "sequelize": "^6.17.0",
     "sequelize-cli": "^6.4.1"
-  }
+  },
+  "name": "sql_project_2",
+  "description": "- Generate Models & Migrations",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/georgios63/sql_project_2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/georgios63/sql_project_2/issues"
+  },
+  "homepage": "https://github.com/georgios63/sql_project_2#readme"
 }
