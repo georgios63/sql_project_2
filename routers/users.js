@@ -3,7 +3,7 @@ const Users = require("../models").user;
 
 const router = new Router();
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   try {
     const allUsers = await Users.findAll({ order: ["id"] });
     if (!allUsers) {
@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Create a new user account
+// Create a new user
 router.post("/", async (req, res, next) => {
   try {
     const email = req.body.email;
