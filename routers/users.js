@@ -1,16 +1,16 @@
 const { Router } = require("express");
 const Users = require("../models").user;
+const TodoLists = require("../models").todoList;
 
 const router = new Router();
 
 router.get("/", async (req, res, next) => {
   try {
     const allUsers = await Users.findAll({ order: ["id"] });
-    if (!allUsers) {
-      res.status(404).send("No users found!");
-    } else {
-      res.send(allUsers);
-    }
+
+    if (!allUsers) return res.status(404).send("No users found!");
+
+    res.send(allUsers);
   } catch (error) {
     console.log(error.message);
     next(error);
@@ -21,12 +21,12 @@ router.get("/", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const email = req.body.email;
-    if (!email || email === " ") {
-      res.status(400).send("Please provide an email");
-    } else {
-      const user = await Users.create(req.body);
-      res.send(user);
-    }
+    if (!email || email === " ")
+      return res.status(400).send("Please provide an email");
+
+    const user = await Users.create(req.body);
+
+    res.send(user);
   } catch (error) {
     console.log(error.message);
     next(error);
@@ -38,14 +38,13 @@ router.get("/:userId", async (req, res, next) => {
   try {
     const userByPk = await Users.findByPk(req.params.userId);
 
-    if (!userByPk) {
-      res.status(400).send(
+    if (!userByPk)
+      return res.status(400).send(
         `The user with the user id:${req.params.userId} 
           doesnt exist! Please provide another one`
       );
-    } else {
-      res.send(userByPk);
-    }
+
+    res.send(userByPk);
   } catch (error) {
     console.log(error.message);
     next(error);
@@ -59,15 +58,35 @@ router.put("/:userId", async (req, res, next) => {
     const { userId } = req.params;
 
     const userByPk = await Users.findByPk(userId);
-    if (!userByPk) {
-      res.status(400).send(
+    if (!userByPk)
+      return res.status(400).send(
         `The user with the user id:${userId} 
           doesnt exist! Please provide another one`
       );
-    } else {
-      const updatedUser = await userByPk.update({ name, password });
-      res.send(updatedUser);
-    }
+
+    const updatedUser = await userByPk.update({ name, password });
+
+    res.send(updatedUser);
+  } catch (error) {
+    console.log(error.message);
+    next(error);
+  }
+});
+
+//get all lists from a user
+router.get("/:userId/lists", async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const listByPk = await TodoLists.findAll({ where: { userId } });
+
+    console.log(listByPk);
+
+    if (listByPk.length <= 0)
+      return res
+        .status(404)
+        .send(`There are no todo lists for the user with id ${userId}`);
+
+    res.send(listByPk);
   } catch (error) {
     console.log(error.message);
     next(error);

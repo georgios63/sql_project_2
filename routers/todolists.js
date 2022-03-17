@@ -42,9 +42,8 @@ router.post("/todoLists", async (req, res, next) => {
   try {
     const { name, userId } = req.body;
 
-    if (!name || name === " " || !userId) {
+    if (!name || name === " " || !userId)
       return res.status(400).send("Please provide a name");
-    }
 
     const user = await Users.findByPk(req.body.userId);
     if (!user) return res.status(404).send("User doesnt exist");
@@ -63,6 +62,43 @@ router.post("/todoLists", async (req, res, next) => {
 
 //update a list
 
+router.put("/todoLists/:listId", async (req, res, next) => {
+  try {
+    const { name } = req.body;
+    const { listId } = req.params;
+
+    const listByPk = await TodoLists.findByPk(listId);
+    if (!listByPk)
+      return res.status(400).send(`The list with the list id:${listId} 
+          doesnt exist! Please provide another one`);
+
+    const updateList = await listByPk.update({ name, userId });
+
+    res.send(updateList);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
+
 //delete a list
 
+router.delete("/todoLists/:listId", async (req, res, next) => {
+  try {
+    const { listId } = req.params;
+    const listByPk = await TodoLists.findByPk(listId);
+
+    console.log(listId);
+
+    if (!listByPk)
+      return res.status(400).send(`The list with the list id:${listId} 
+          doesnt exist! Please provide another one`);
+
+    const deleteList = await listByPk.destroy();
+    res.send(deleteList);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
 module.exports = router;
